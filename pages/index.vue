@@ -23,11 +23,11 @@ export default {
     }
   },
   mounted() {
+    this.url = 'https://sasuke.social/@lugodev/107626977279235342'
     this.loadPost()
   },
   methods: {
     loadPost () {
-      this.url = 'https://sasuke.social/@lugodev/107626977279235342'
       try {
         const u = new URL(this.url)
         console.log(u)

@@ -1,13 +1,12 @@
 <template>
   <div>
     <div v-if="post.account" class="user-card">
-      <span class="avatar">
-        <img
-          v-if="post.account.avatar"
-          :src="post.account.avatar"
-          :alt="post.account.display_name"
-        >
-      </span>
+      <img
+        v-if="post.account.avatar"
+        class="avatar"
+        :src="post.account.avatar"
+        :alt="post.account.display_name"
+      >
       <span>
         <span class="name">
           {{ post.account.display_name }}
@@ -16,7 +15,6 @@
           @{{ post.account.username }}@{{ host }}
         </span>
       </span>
-      <span><img src="mastodon.png" alt="" width="25pt" class="float-right"></span>
     </div>
   </div>
 </template>
@@ -43,14 +41,10 @@ export default {
     overflow-wrap: normal;
 }
 
-.user-card:hover {
-    cursor: pointer;
-}
-
 .user-card .avatar {
     width: 40pt;
     height: 40pt;
-    @apply mr-3;
+    @apply mr-3 rounded-full;
 }
 
 .user-card .avatar img {
@@ -58,11 +52,6 @@ export default {
     width: 40pt;
     height: 40pt;
     @apply rounded-full;
-}
-
-.user-card.small .avatar img {
-    width: 30pt !important;
-    height: 30pt !important;
 }
 
 .user-card .name {

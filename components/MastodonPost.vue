@@ -1,5 +1,6 @@
 <template>
   <div v-if="post" class="post">
+    <div class="logo"><img src="mastodon.png" alt="" width="25pt"></div>
     <user-card :post="post" :host="host" />
     <div v-html="post.content" class="mt-3"></div>
     <div class="footer">
@@ -31,6 +32,9 @@ export default {
 <style>
 .post {
   @apply p-10 rounded-lg shadow-lg border-2;
+}
+.post .logo {
+  float: right;
 }
 .post p {
   @apply mb-3;
