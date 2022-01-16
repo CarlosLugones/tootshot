@@ -3,6 +3,9 @@
     <div class="logo"><img src="mastodon.png" alt="" width="25pt"></div>
     <user-card :post="post" :host="host" />
     <div v-html="post.content" class="mt-3"></div>
+    <div v-if="post.card">
+      <post-card :card="post.card" />
+    </div>
     <div class="footer">
       <span>{{ $moment(post.created_at).format('MMMM Do YYYY, h:mm:ss a') }}</span>
       <span>・ <i class="mdi mdi-earth"></i></span>
