@@ -42,6 +42,7 @@
             :dark-mode="darkMode"
           />
         </div>
+        {{ wrapper }}
       </div>
     </div>
     <div class="lg:hidden visible">
