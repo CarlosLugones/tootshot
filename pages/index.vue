@@ -67,11 +67,11 @@ export default {
       url: null,
       host: null,
       post: null,
-      wrapper: 'desktop',
+      wrapper: null,
       darkMode: false,
       details: true,
-      padding: 'p-20',
-      gradient: 'gradient-1'
+      padding: null,
+      gradient: null
     }
   },
   mounted() {
