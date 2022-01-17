@@ -31,8 +31,10 @@
           <div class="gradient gradient-5" @click="gradient = 'gradient-5'"></div>
           <div class="gradient gradient-6" @click="gradient = 'gradient-6'"></div>
           <div class="gradient gradient-7" @click="gradient = 'gradient-7'"></div>
+          <Button class="p-button-help" icon="pi pi-copy" />
+          <Button class="p-button-help" icon="pi pi-download" @click="downloadPost()" />
         </div>
-        <div :class="`post-wrapper ${wrapperSize} ${gradient} ${padding}`">
+        <div :class="`post-wrapper ${wrapperSize} ${gradient} ${padding}`" id="post">
           <mastodon-post
             :post="post"
             :host="host"
@@ -73,7 +75,13 @@ export default {
     }
   },
   mounted() {
-    this.url = 'https://sasuke.social/@lugodev/107619692658603975'
+    // Init params
+    this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107619692658603975'
+    this.wrapperSize = this.$route.query.wrapperSize || 'desktop'
+    this.darkMode = this.$route.query.darkMode || false
+    this.details = this.$route.query.details || true
+    this.padding = this.$route.query.padding || 'p-20'
+    this.gradient = this.$route.query.gradient || 'gradient-1'
     this.loadPost()
   },
   methods: {
@@ -114,6 +122,9 @@ export default {
       } else {
         this.padding = 'p-10'
       }
+    },
+    downloadPost() {
+      // ToDo
     }
   }
 }
