@@ -9,7 +9,7 @@
       >
       <span>
         <span class="name">
-          {{ post.account.display_name }}
+          {{ post.account.display_name || post.account.username }}
         </span>
         <span class="username">
           @{{ post.account.username }}@{{ host }}
