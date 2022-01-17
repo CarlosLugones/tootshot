@@ -74,12 +74,12 @@ export default {
       gradient: null
     }
   },
-  mounted() {
+  beforeMount() {
     // Init params
     this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107619692658603975'
     this.wrapper = this.$route.query.wrapper || 'desktop'
-    this.darkMode = this.$route.query.dark || false
-    this.details = this.$route.query.details || true
+    this.darkMode = this.$route.query.dark === 'true' || false
+    this.details = this.$route.query.details === 'true' || false
     this.padding = this.$route.query.padding || 'p-20'
     this.gradient = this.$route.query.gradient || 'gradient-1'
     this.loadPost()
