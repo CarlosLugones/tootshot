@@ -1,37 +1,46 @@
 <template>
   <div>
-    <div class="topbar">
-      <span class="brand">MastoShot</span>
-      <span class="search w-full">
-        <span class="p-input-icon-left w-full">
-          <i class="pi pi-search" />
-          <InputText v-model="url" type="text" placeholder="Paste Mastodon toot link" class="w-full" @input="loadPost()" />
+    <div class="">
+      <div class="topbar">
+        <span class="brand">MastoShot</span>
+        <span class="search w-full">
+          <span class="p-input-icon-left w-full">
+            <i class="pi pi-search" />
+            <InputText
+              v-model="url"
+              type="text"
+              placeholder="Paste Mastodon toot link"
+              class="w-full"
+              @input="loadPost()"
+            />
+          </span>
         </span>
-      </span>
-    </div>
-    <div class="mt-20"></div>
-    <div class="container w-10/12 mx-auto mt-10">    
-      <div class="buttons">
-        <Button :class="wrapperSize === 'desktop' ? '' : 'p-button-outlined'" icon="pi pi-desktop" @click="wrapperSize = 'desktop'" />
-        <Button :class="wrapperSize === 'tablet' ? '' : 'p-button-outlined'" icon="pi pi-tablet" @click="wrapperSize = 'tablet'" />
-        <Button :class="wrapperSize === 'mobile' ? '' : 'p-button-outlined'" icon="pi pi-mobile" @click="wrapperSize = 'mobile'" />
-        <Button :class="darkMode ? '' : 'p-button-outlined'" icon="pi pi-moon" @click="darkMode = !darkMode" />
-        <Button :class="details ? '' : 'p-button-outlined'" icon="pi pi-star" @click="details = !details" />
-        <Button :class="padding === 'p-20' ? '' : 'p-button-outlined'" icon="pi pi-arrows-h" @click="togglePadding()" />
-        <div class="gradient gradient-1" @click="gradient = 'gradient-1'"></div>
-        <div class="gradient gradient-2" @click="gradient = 'gradient-2'"></div>
-        <div class="gradient gradient-3" @click="gradient = 'gradient-3'"></div>
-        <div class="gradient gradient-4" @click="gradient = 'gradient-4'"></div>
-        <div class="gradient gradient-5" @click="gradient = 'gradient-5'"></div>
-        <div class="gradient gradient-6" @click="gradient = 'gradient-6'"></div>
       </div>
-      <div :class="`post-wrapper ${wrapperSize} ${gradient} ${padding}`">
-        <mastodon-post
-          :post="post"
-          :host="host"
-          :details="details"
-          :dark-mode="darkMode"
-        />
+      <div class="mt-20"></div>
+      <div class="container w-10/12 mx-auto mt-10">    
+        <div class="buttons">
+          <Button :class="wrapperSize === 'desktop' ? '' : 'p-button-outlined'" icon="pi pi-desktop" @click="wrapperSize = 'desktop'" />
+          <Button :class="wrapperSize === 'tablet' ? '' : 'p-button-outlined'" icon="pi pi-tablet" @click="wrapperSize = 'tablet'" />
+          <Button :class="wrapperSize === 'mobile' ? '' : 'p-button-outlined'" icon="pi pi-mobile" @click="wrapperSize = 'mobile'" />
+          <Button :class="darkMode ? '' : 'p-button-outlined'" icon="pi pi-moon" @click="darkMode = !darkMode" />
+          <Button :class="details ? '' : 'p-button-outlined'" icon="pi pi-star" @click="details = !details" />
+          <Button :class="padding === 'p-20' ? '' : 'p-button-outlined'" icon="pi pi-arrows-h" @click="togglePadding()" />
+          <div class="gradient gradient-1" @click="gradient = 'gradient-1'"></div>
+          <div class="gradient gradient-2" @click="gradient = 'gradient-2'"></div>
+          <div class="gradient gradient-3" @click="gradient = 'gradient-3'"></div>
+          <div class="gradient gradient-4" @click="gradient = 'gradient-4'"></div>
+          <div class="gradient gradient-5" @click="gradient = 'gradient-5'"></div>
+          <div class="gradient gradient-6" @click="gradient = 'gradient-6'"></div>
+          <div class="gradient gradient-7" @click="gradient = 'gradient-7'"></div>
+        </div>
+        <div :class="`post-wrapper ${wrapperSize} ${gradient} ${padding}`">
+          <mastodon-post
+            :post="post"
+            :host="host"
+            :details="details"
+            :dark-mode="darkMode"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -66,7 +75,14 @@ export default {
         console.log(u)
         const { origin, host, pathname } = u
         console.log(origin, host, pathname)
-        const id = pathname.split('/')[2]
+        const parts = pathname.split('/')
+        console.log(parts)
+        let id
+        if (parts.length === 3) {
+          id = parts[2]
+        } else {
+          id = parts[3]
+        }
         console.log(id)
         this.$axios.get(`${origin}/api/v1/statuses/${id}`)
           .then(res => {
@@ -141,33 +157,38 @@ export default {
   cursor: pointer;
 }
 .gradient-1 {
-  background: #12c2e9;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-.gradient-2 {
   background: #7F00FF;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #E100FF, #7F00FF);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.gradient-3 {
-  background: #0f0c29;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.gradient-2 {
+  background: #1a2a6c;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #fdbb2d, #b21f1f, #1a2a6c);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fdbb2d, #b21f1f, #1a2a6c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.gradient-4 {
+.gradient-3 {
   background: #12c2e9;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.gradient-5 {
+.gradient-4 {
   background: #833ab4;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.gradient-6 {
+.gradient-5 {
   background: #6441A5;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #2a0845, #6441A5);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #2a0845, #6441A5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.gradient-6 {
+  background: #000000;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.gradient-7 {
+  background: #E0EAFC;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 </style>
