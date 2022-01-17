@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Toast />
     <div class="lg:flex hidden">
       <div class="topbar">
         <span class="brand">MastoShot</span>
@@ -31,14 +32,18 @@
           <div class="gradient gradient-5" @click="gradient = 'gradient-5'"></div>
           <div class="gradient gradient-6" @click="gradient = 'gradient-6'"></div>
           <div class="gradient gradient-7" @click="gradient = 'gradient-7'"></div>
-          <Button class="p-button-help" icon="pi pi-copy" />
+          <Button
+            class="p-button-help"
+            :icon="copying ? 'pi pi-spin pi-spinner' : 'pi pi-copy'"
+            @click="copyPost()"
+          />
           <Button
             class="p-button-help"
             :icon="downloading ? 'pi pi-spin pi-spinner' : 'pi pi-download'"
             @click="downloadPost()"
           />
         </div>
-        <div :class="`post-wrapper ${wrapper} ${gradient} ${padding}`" id="post">
+        <div v-if="post" :class="`post-wrapper ${wrapper} ${gradient} ${padding}`" id="post">
           <mastodon-post
             :post="post"
             :host="host"
@@ -46,6 +51,7 @@
             :dark-mode="darkMode"
           />
         </div>
+        <div ref="click"></div>
       </div>
     </div>
     <div class="lg:hidden visible">
@@ -63,9 +69,10 @@
 <script>
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
+import Toast from 'primevue/toast'
 export default {
   name: 'IndexPage',
-  components: { Button, InputText },
+  components: { Button, InputText, Toast },
   data () {
     return {
       url: null,
@@ -76,6 +83,7 @@ export default {
       details: true,
       padding: null,
       gradient: null,
+      copying: false,
       downloading: false
     }
   },
@@ -93,21 +101,16 @@ export default {
     loadPost () {
       try {
         const u = new URL(this.url)
-        console.log(u)
         const { origin, host, pathname } = u
-        console.log(origin, host, pathname)
         const parts = pathname.split('/')
-        console.log(parts)
         let id
         if (parts.length === 3) {
           id = parts[2]
         } else {
           id = parts[3]
         }
-        console.log(id)
         this.$axios.get(`${origin}/api/v1/statuses/${id}`)
           .then(res => {
-            console.log(res)
             this.post = res.data
             this.host = host
           })
@@ -117,10 +120,8 @@ export default {
       } catch (e) {
         console.log(e)
       }
-      /* this.$http.get(this.url).then(response => {
-        console.log(response)
-      }) */
     },
+
     togglePadding () {
       if (this.padding == 'p-10') {
         this.padding = 'p-20'
@@ -128,14 +129,92 @@ export default {
         this.padding = 'p-10'
       }
     },
-    downloadPost() {
-      this.downloading = true
+
+    async getScreenshot() {
       const url = encodeURIComponent(`https://mastoshot.xyz?toot=${this.url}&wrapper=${this.wrapper}&details=${this.details}&padding=${this.padding}&gradient=${this.gradient}`)
       const screentshotUrl = `https://apimania.netlify.app/api/screenshot?url=${url}&size=.post-wrapper`
       const proxyUrl = `https://lugodev-cors-anywhere.herokuapp.com/${screentshotUrl}`
-      this.$axios.get(proxyUrl, { responseType:"blob" }, { mode: 'cors'})
+      const res = await this.$axios.get(proxyUrl, {
+        responseType: 'blob'
+      })
+      const blob = new Blob([res.data], { type: 'image/jpeg' })
+      return blob
+    },
+
+    async copyPost() {
+      this.copying = true
+      const blob = await this.getScreenshot()
+
+      const img = new Image
+      const c = document.createElement('canvas')
+      const ctx = c.getContext('2d')
+      const that = this
+
+      img.onload = function(){
+        c.width = img.naturalWidth
+        c.height = img.naturalHeight
+        ctx.drawImage(img,0,0)
+        that.$refs.click.focus()
+        c.toBlob(blob=>{
+          const isSafari = /^((?!chrome|android).)*safari/i.test(
+            navigator?.userAgent
+          );
+          const isNotFirefox = navigator.userAgent.indexOf("Firefox") < 0;
+
+          if (isSafari) {
+            navigator.clipboard
+              .write([
+                new ClipboardItem({'image/png': blob}),
+              ])
+              .then(() => {
+                that.copying = false
+                that.$toast.add({severity:'success', summary: 'Screenshot copied to clipboard', life: 3000})
+              })
+          } else if (isNotFirefox) {
+            navigator?.permissions
+              ?.query({ name: "clipboard-write" })
+              .then(async (result) => {
+                if (result.state === "granted") {
+                  navigator.clipboard
+                    .write([
+                      new ClipboardItem({'image/png': blob}),
+                    ])
+                    .then(() => {
+                      that.copying = false
+                      that.$toast.add({severity:'success', summary: 'Screenshot copied to clipboard', life: 3000})
+                    })
+                    .catch((err) => {
+                      // Error
+                      that.$toast.add({severity:'error', summary: 'Error copying to clipbaord', detail:'Next time, stay in the tab to complete the copy'});
+                      console.error("Error:", err);
+                      that.copying = false
+                    });
+                }
+              });
+          } else {
+            alert("Firefox does not support this functionality");
+          }
+        },'image/png')
+      }
+      const url = window.URL.createObjectURL(blob)
+      img.src = url
+    },
+
+    async downloadPost() {
+      this.downloading = true
+
+      const blob = await this.getScreenshot()
+
+      // Download
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'toot.jpeg'
+      link.click()
+      this.downloading = false
+      
+      /* this.$axios.get(proxyUrl, { responseType:"blob" }, { mode: 'cors'})
         .then(res => {
-          console.log(res)
           const blob = new Blob([res.data], { type: 'image/jpeg' })
           const url = window.URL.createObjectURL(blob)
           const link = document.createElement('a')
@@ -143,11 +222,13 @@ export default {
           link.download = 'toot.jpeg'
           link.click()
           this.downloading = false
+
+          
         })
         .catch(err => {
           console.log(err)
           this.downloading = false
-        })
+        }) */
     }
   }
 }
