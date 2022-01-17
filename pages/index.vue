@@ -156,15 +156,15 @@ export default {
 }
 .post-wrapper.desktop {
   transition: 500ms;
-  @apply w-full;
+  width: 1290px;
 }
 .post-wrapper.tablet {
   transition: 500ms;
-  @apply w-8/12;
+  width: 860px;
 }
 .post-wrapper.mobile {
   transition: 500ms;
-  @apply w-5/12;
+  width: 537px;
 }
 .gradient {
   width: 37.7px;
