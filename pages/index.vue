@@ -77,8 +77,8 @@ export default {
   mounted() {
     // Init params
     this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107619692658603975'
-    this.wrapperSize = this.$route.query.wrapperSize || 'desktop'
-    this.darkMode = this.$route.query.darkMode || false
+    this.wrapperSize = this.$route.query.size || 'desktop'
+    this.darkMode = this.$route.query.dark || false
     this.details = this.$route.query.details || true
     this.padding = this.$route.query.padding || 'p-20'
     this.gradient = this.$route.query.gradient || 'gradient-1'
