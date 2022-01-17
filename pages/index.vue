@@ -15,6 +15,7 @@
         <Button :class="wrapperSize === 'desktop' ? '' : 'p-button-outlined'" icon="pi pi-desktop" @click="wrapperSize = 'desktop'" />
         <Button :class="wrapperSize === 'tablet' ? '' : 'p-button-outlined'" icon="pi pi-tablet" @click="wrapperSize = 'tablet'" />
         <Button :class="wrapperSize === 'mobile' ? '' : 'p-button-outlined'" icon="pi pi-mobile" @click="wrapperSize = 'mobile'" />
+        <Button :class="darkMode ? '' : 'p-button-outlined'" icon="pi pi-moon" @click="darkMode = !darkMode" />
         <Button :class="details ? '' : 'p-button-outlined'" icon="pi pi-star" @click="details = !details" />
         <Button :class="padding === 'p-20' ? '' : 'p-button-outlined'" icon="pi pi-arrows-h" @click="togglePadding()" />
         <div class="gradient gradient-1" @click="gradient = 'gradient-1'"></div>
@@ -29,6 +30,7 @@
           :post="post"
           :host="host"
           :details="details"
+          :dark-mode="darkMode"
         />
       </div>
     </div>
@@ -47,13 +49,14 @@ export default {
       host: null,
       post: null,
       wrapperSize: 'desktop',
+      darkMode: false,
       details: true,
       padding: 'p-20',
       gradient: 'gradient-1'
     }
   },
   mounted() {
-    this.url = 'https://sasuke.social/@lugodev/107626977279235342'
+    this.url = 'https://sasuke.social/@lugodev/107619692658603975'
     this.loadPost()
   },
   methods: {

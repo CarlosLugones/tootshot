@@ -1,5 +1,5 @@
 <template>
-  <div v-if="post" class="post">
+  <div v-if="post" :class="`post ${dark}`">
     <div class="logo"><img src="mastodon.png" alt="" width="25pt"></div>
     <user-card :post="post" :host="host" />
     <div v-html="post.content" class="mt-3"></div>
@@ -33,6 +33,15 @@ export default {
     details: {
       type: Boolean,
       default: true
+    },
+    darkMode: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    dark () {
+      return this.darkMode ? 'dark' : ''
     }
   }
 }
@@ -56,5 +65,15 @@ export default {
 }
 .post .footer {
   @apply text-gray-600 text-sm;
+}
+/* dark mode */
+.post.dark {
+  @apply bg-gray-900 text-white border-gray-500;
+}
+.post.dark .footer {
+  @apply text-gray-100;
+}
+.post.dark .card {
+  @apply text-gray-100 border-gray-700;
 }
 </style>
