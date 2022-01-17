@@ -15,6 +15,12 @@
       <p class="mb-3">Do you like this? Consider supporting with a donation.</p>
       <p>Made by <a href="https://lugodev.com" class="text-blue-600" target="_blank">Carlos Lugones</a>.</p>
       <template #footer>
+        <Button
+          label="Close"
+          icon="pi pi-times"
+          class="p-button-outlined"
+          @click="helpModalActive = false"
+        />
         <a href="https://paynest.app/lugodev" target="_blabj">
           <Button
             label="Donate"
