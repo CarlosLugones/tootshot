@@ -53,6 +53,7 @@ export default {
   @apply text-xs text-gray-500;
 }
 .post .card .domain {
+  word-break: break-all;
   @apply text-xs text-gray-400;
 }
 </style>

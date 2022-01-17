@@ -2,7 +2,7 @@
   <div v-if="post" :class="`post ${dark}`">
     <div class="logo"><img src="mastodon.png" alt="" width="25pt"></div>
     <user-card :post="post" :host="host" />
-    <div v-html="post.content" class="mt-3"></div>
+    <div v-html="post.content" class="content mt-3"></div>
     <div v-if="post.card">
       <post-card :card="post.card" />
     </div>
@@ -58,6 +58,7 @@ export default {
   @apply mb-3;
 }
 .post a {
+  word-break: break-all;
   @apply text-blue-500;
 }
 .post .invisible {
