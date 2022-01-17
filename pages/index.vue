@@ -32,7 +32,11 @@
           <div class="gradient gradient-6" @click="gradient = 'gradient-6'"></div>
           <div class="gradient gradient-7" @click="gradient = 'gradient-7'"></div>
           <Button class="p-button-help" icon="pi pi-copy" />
-          <Button class="p-button-help" icon="pi pi-download" @click="downloadPost()" />
+          <Button
+            class="p-button-help"
+            :icon="downloading ? 'pi pi-spin pi-spinner' : 'pi pi-download'"
+            @click="downloadPost()"
+          />
         </div>
         <div :class="`post-wrapper ${wrapper} ${gradient} ${padding}`" id="post">
           <mastodon-post
@@ -42,7 +46,6 @@
             :dark-mode="darkMode"
           />
         </div>
-        {{ wrapper }}
       </div>
     </div>
     <div class="lg:hidden visible">
@@ -72,13 +75,14 @@ export default {
       darkMode: false,
       details: true,
       padding: null,
-      gradient: null
+      gradient: null,
+      downloading: false
     }
   },
   beforeMount() {
     // Init params
     this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107619692658603975'
-    this.wrapper = this.$route.query.w || 'desktop'
+    this.wrapper = this.$route.query.wrapper || 'desktop'
     this.darkMode = this.$route.query.dark === 'true' || false
     this.details = this.$route.query.details === 'true' || false
     this.padding = this.$route.query.padding || 'p-20'
@@ -125,10 +129,11 @@ export default {
       }
     },
     downloadPost() {
-      const url = encodeURIComponent(`https://mastoshot.xyz?toot=${this.url}&w=${this.wrapper}&details=${this.details}&padding=${this.padding}&gradient=${this.gradient}`)
+      this.downloading = true
+      const url = encodeURIComponent(`https://mastoshot.xyz?toot=${this.url}&wrapper=${this.wrapper}&details=${this.details}&padding=${this.padding}&gradient=${this.gradient}`)
       const screentshotUrl = `https://apimania.netlify.app/api/screenshot?url=${url}&size=.post-wrapper`
-      this.$axios.setHeader('Access-Control-Allow-Origin', '*')
-      this.$axios.get(screentshotUrl, { responseType:"blob" }, { mode: 'cors'})
+      const proxyUrl = `https://lugodev-cors-anywhere.herokuapp.com/${screentshotUrl}`
+      this.$axios.get(proxyUrl, { responseType:"blob" }, { mode: 'cors'})
         .then(res => {
           console.log(res)
           const blob = new Blob([res.data], { type: 'image/jpeg' })
@@ -137,9 +142,11 @@ export default {
           link.href = url
           link.download = 'toot.jpeg'
           link.click()
+          this.downloading = false
         })
         .catch(err => {
           console.log(err)
+          this.downloading = false
         })
     }
   }
