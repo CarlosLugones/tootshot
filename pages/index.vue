@@ -77,7 +77,7 @@ export default {
   beforeMount() {
     // Init params
     this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107619692658603975'
-    this.wrapper = this.$route.query.wrapper || 'desktop'
+    this.wrapper = this.$route.query.w || 'desktop'
     this.darkMode = this.$route.query.dark === 'true' || false
     this.details = this.$route.query.details === 'true' || false
     this.padding = this.$route.query.padding || 'p-20'
