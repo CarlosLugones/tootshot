@@ -125,7 +125,22 @@ export default {
       }
     },
     downloadPost() {
-      // ToDo
+      const url = encodeURIComponent(`https://mastoshot.xyz?toot=${this.url}&w=${this.wrapper}&details=${this.details}&padding=${this.padding}&gradient=${this.gradient}`)
+      const screentshotUrl = `https://apimania.netlify.app/api/screenshot?url=${url}&size=.post-wrapper`
+      this.$axios.setHeader('Access-Control-Allow-Origin', '*')
+      this.$axios.get(screentshotUrl, { responseType:"blob" }, { mode: 'cors'})
+        .then(res => {
+          console.log(res)
+          const blob = new Blob([res.data], { type: 'image/jpeg' })
+          const url = window.URL.createObjectURL(blob)
+          const link = document.createElement('a')
+          link.href = url
+          link.download = 'toot.jpeg'
+          link.click()
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
