@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="">
+    <div class="lg:flex hidden">
       <div class="topbar">
         <span class="brand">MastoShot</span>
         <span class="search w-full">
@@ -16,8 +16,7 @@
           </span>
         </span>
       </div>
-      <div class="mt-20"></div>
-      <div class="container w-10/12 mx-auto mt-10">    
+      <div class="container w-10/12 mx-auto mt-20">    
         <div class="buttons">
           <Button :class="wrapperSize === 'desktop' ? '' : 'p-button-outlined'" icon="pi pi-desktop" @click="wrapperSize = 'desktop'" />
           <Button :class="wrapperSize === 'tablet' ? '' : 'p-button-outlined'" icon="pi pi-tablet" @click="wrapperSize = 'tablet'" />
@@ -41,6 +40,15 @@
             :dark-mode="darkMode"
           />
         </div>
+      </div>
+    </div>
+    <div class="lg:hidden visible">
+      <div class="h-screen grid content-center align-middle text-center p-10">
+        <p class="brand mb-5 mx-auto">MastoShot</p>
+        <img src="cover.jpg" alt="" class="mb-5 rounded">
+        <p>
+          Load this in desktop to take beautiful shots of your Mastodon toots.
+        </p>
       </div>
     </div>
   </div>
@@ -190,5 +198,11 @@ export default {
   background: #E0EAFC;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.brand {
+  background: linear-gradient(to right, #E100FF, #7F00FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  @apply text-3xl text-gray-800 text-center;
 }
 </style>
