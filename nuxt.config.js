@@ -1,3 +1,7 @@
+const description = 'A beautiful way to share your toots.'
+const banner = '//mastoshot.xyz/cover.jpg'
+const title = 'Mastoshot — A beautiful way to share your toots'
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -7,15 +11,99 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'mastoshot',
+    title: title,
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { hid: 'description', name: 'description', content: description },
+      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'og:locale', content: 'en_EN' },
+      { name: 'og:locale', property: 'og:locale', content: 'en_EN' },
+      { hid: 'og:type', name: 'og:type', content: 'website' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      {
+        hid: 'og:site_name',
+        name: 'og:site_name',
+        content: title
+      },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: title
+      },
+      {
+        hid: 'og:title',
+        name: 'og:title',
+        content: title
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: title
+      },
+      {
+        hid: 'og:description',
+        name: 'og:description',
+        content: description
+      },
+      {
+        hid: 'og:image',
+        name: 'og:image',
+        content: banner
+      },
+      {
+        name: 'image',
+        property: 'og:image',
+        content: banner
+      },
+      {
+        hid: 'twitter:card',
+        name: 'twitter:card',
+        content: 'summary_large_image'
+      },
+      {
+        hid: 'twitter:image:alt',
+        name: 'twitter:image:alt',
+        content: 'Mastoshot'
+      },
+      { hid: 'twitter:site', name: 'twitter:site', content: '@lugodev' },
+      {
+        hid: 'twitter:title',
+        name: 'twitter:title',
+        content: title
+      },
+      {
+        hid: 'twitter:description',
+        name: 'twitter:description',
+        content: description
+      },
+      {
+        hid: 'twitter:image',
+        name: 'twitter:image',
+        content: banner
+      },
+      {
+        hid: 'twitter:creator',
+        name: 'twitter:creator',
+        content: '@lugodev'
+      },
+      {
+        name: 'author',
+        content: 'Mastoshot'
+      },
+      {
+        name: 'description',
+        property: 'og:description',
+        content: description
+      },
+      {
+        name: 'og:url',
+        property: 'og:url',
+        content: 'https://mastoshot.xyz'
+      }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
