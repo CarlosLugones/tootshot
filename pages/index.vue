@@ -16,6 +16,7 @@
         <Button :class="wrapperSize === 'tablet' ? '' : 'p-button-outlined'" icon="pi pi-tablet" @click="wrapperSize = 'tablet'" />
         <Button :class="wrapperSize === 'mobile' ? '' : 'p-button-outlined'" icon="pi pi-mobile" @click="wrapperSize = 'mobile'" />
         <Button :class="details ? '' : 'p-button-outlined'" icon="pi pi-star" @click="details = !details" />
+        <Button :class="padding === 'p-20' ? '' : 'p-button-outlined'" icon="pi pi-arrows-h" @click="togglePadding()" />
         <div class="gradient gradient-1" @click="gradient = 'gradient-1'"></div>
         <div class="gradient gradient-2" @click="gradient = 'gradient-2'"></div>
         <div class="gradient gradient-3" @click="gradient = 'gradient-3'"></div>
@@ -23,7 +24,7 @@
         <div class="gradient gradient-5" @click="gradient = 'gradient-5'"></div>
         <div class="gradient gradient-6" @click="gradient = 'gradient-6'"></div>
       </div>
-      <div :class="`post-wrapper ${wrapperSize} ${gradient}`">
+      <div :class="`post-wrapper ${wrapperSize} ${gradient} ${padding}`">
         <mastodon-post
           :post="post"
           :host="host"
@@ -47,6 +48,7 @@ export default {
       post: null,
       wrapperSize: 'desktop',
       details: true,
+      padding: 'p-20',
       gradient: 'gradient-1'
     }
   },
@@ -78,6 +80,13 @@ export default {
       /* this.$http.get(this.url).then(response => {
         console.log(response)
       }) */
+    },
+    togglePadding () {
+      if (this.padding == 'p-10') {
+        this.padding = 'p-20'
+      } else {
+        this.padding = 'p-10'
+      }
     }
   }
 }
@@ -105,7 +114,7 @@ export default {
   @apply mx-auto text-center my-5 flex gap-2 place-content-center;
 }
 .post-wrapper {
-  @apply p-10 mb-10 mx-auto;
+  @apply mb-10 mx-auto;
 }
 .post-wrapper.desktop {
   transition: 500ms;
