@@ -1,0 +1,52 @@
+<!--
+  __  __           _            _           _   
+ |  \/  |         | |          | |         | |  
+ | \  / | __ _ ___| |_ ___  ___| |__   ___ | |_ 
+ | |\/| |/ _` / __| __/ _ \/ __| '_ \ / _ \| __|
+ | |  | | (_| \__ \ || (_) \__ \ | | | (_) | |_ 
+ |_|  |_|\__,_|___/\__\___/|___/_| |_|\___/ \__|.xyz
+-->
+<!DOCTYPE html>
+<html lang="es" {{ HTML_ATTRS }}>
+  <head {{ HEAD_ATTRS }}>
+    {{ HEAD }}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CD2GX9V5G6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CD2GX9V5G6');
+    </script>
+  </head>
+  <body {{ BODY_ATTRS }}>
+    {{ APP }}
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "Mastoshot",
+      "url": "https://mastoshot.xyz",
+      "description": "A beautiful way to share your toots.",
+      "founders": [
+        {
+          "@type": "Person",
+          "name": "Carlos Lugones",
+          "url": "https://lugodev.com"
+        }
+      ],
+      "logo": "https://mastoshot.xyz/logo.png",
+      "email": "contact@lugodev.com",
+      "contactPoint" : [
+        {
+          "@type" : "ContactPoint",
+          "contactType" : "customer service",
+          "email": "contact@lugodev.com",
+          "url": "https://mastoshot.xyz",
+        }
+      ]
+     }
+     </script>
+  </body>
+</html>
