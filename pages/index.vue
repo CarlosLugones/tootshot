@@ -1,6 +1,30 @@
 <template>
   <div>
     <Toast />
+    <!-- help modal -->
+    <Dialog
+      :visible="helpModalActive"
+      :style="{width: '50vw'}"
+      :modal="true"
+      header="About TootShot"
+      @hide="helpModalActive = false"
+    >
+      <p class="mb-3">
+        TootShot is a beautiful way to share your toots. Paste the toot URL, select style options and download or copy the screenshot.
+      </p>
+      <p class="mb-3">Do you like this? Consider supporting with a donation.</p>
+      <p>Made by <a href="https://lugodev.com" class="text-blue-600" target="_blank">Carlos Lugones</a>.</p>
+      <template #footer>
+        <a href="https://paynest.app/lugodev" target="_blabj">
+          <Button
+            label="Donate"
+            icon="pi pi-heart"
+            class="p-button-danger"
+          />
+        </a>
+      </template>
+    </Dialog>
+    <!-- end help modal -->
     <div class="lg:flex hidden">
       <div class="topbar">
         <span class="brand">TootShot</span>
@@ -15,6 +39,13 @@
               @input="loadPost()"
             />
           </span>
+        </span>
+        <span>
+          <Button
+            icon="pi pi-question-circle"
+            class="p-button-rounded p-button-info p-button-outlined"
+            @click="helpModalActive = true"
+          />
         </span>
       </div>
       <div class="container w-10/12 mx-auto mt-20">    
@@ -71,9 +102,10 @@
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Toast from 'primevue/toast'
+import Dialog from 'primevue/dialog'
 export default {
   name: 'IndexPage',
-  components: { Button, InputText, Toast },
+  components: { Button, InputText, Toast, Dialog },
   data () {
     return {
       url: null,
@@ -85,7 +117,8 @@ export default {
       padding: null,
       gradient: null,
       copying: false,
-      downloading: false
+      downloading: false,
+      helpModalActive: false
     }
   },
   beforeMount() {
@@ -252,6 +285,7 @@ export default {
 }
 .topbar .search {
   display: inline;
+  @apply mr-3;
 }
 .buttons {
   @apply mx-auto text-center my-5 flex gap-2 place-content-center;
