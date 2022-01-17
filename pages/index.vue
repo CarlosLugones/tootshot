@@ -3,7 +3,7 @@
     <Toast />
     <div class="lg:flex hidden">
       <div class="topbar">
-        <span class="brand">MastoShot</span>
+        <span class="brand">TootShot</span>
         <span class="search w-full">
           <span class="p-input-icon-left w-full">
             <i class="pi pi-search" />
@@ -56,9 +56,10 @@
     </div>
     <div class="lg:hidden visible">
       <div class="h-screen grid content-center align-middle text-center p-10">
-        <p class="brand mb-5 mx-auto">MastoShot</p>
+        <p class="brand mb-5 mx-auto">TootShot</p>
         <img src="cover.jpg" alt="" class="mb-5 rounded">
         <p>
+          <b>Mobile not supported:</b>
           Load this in desktop to take beautiful shots of your Mastodon toots.
         </p>
       </div>
@@ -131,7 +132,7 @@ export default {
     },
 
     async getScreenshot() {
-      const url = encodeURIComponent(`https://mastoshot.xyz?toot=${this.url}&wrapper=${this.wrapper}&details=${this.details}&padding=${this.padding}&gradient=${this.gradient}`)
+      const url = encodeURIComponent(`https://tootshot.xyz?toot=${this.url}&wrapper=${this.wrapper}&details=${this.details}&padding=${this.padding}&gradient=${this.gradient}`)
       const screentshotUrl = `https://apimania.netlify.app/api/screenshot?url=${url}&size=.post-wrapper`
       const proxyUrl = `https://lugodev-cors-anywhere.herokuapp.com/${screentshotUrl}`
       const res = await this.$axios.get(proxyUrl, {

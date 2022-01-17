@@ -1,6 +1,6 @@
-const description = 'A beautiful way to share your toots.'
-const banner = '//mastoshot.xyz/cover.jpg'
-const title = 'Mastoshot — A beautiful way to share your toots'
+const description = 'A beautiful way to share your toots'
+const banner = '//tootshot.xyz/cover.jpg'
+const title = 'TootShot — A beautiful way to share your toots'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -67,7 +67,7 @@ export default {
       {
         hid: 'twitter:image:alt',
         name: 'twitter:image:alt',
-        content: 'Mastoshot'
+        content: 'TootShot'
       },
       { hid: 'twitter:site', name: 'twitter:site', content: '@lugodev' },
       {
@@ -92,7 +92,7 @@ export default {
       },
       {
         name: 'author',
-        content: 'Mastoshot'
+        content: 'TootShot'
       },
       {
         name: 'description',
@@ -102,7 +102,7 @@ export default {
       {
         name: 'og:url',
         property: 'og:url',
-        content: 'https://mastoshot.xyz'
+        content: 'https://tootshot.xyz'
       }
     ],
     link: [
