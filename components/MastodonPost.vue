@@ -10,9 +10,11 @@
       <span>{{ $moment(post.created_at).format('MMMM Do YYYY, h:mm:ss a') }}</span>
       <span>・ <i class="mdi mdi-earth"></i></span>
       <span v-if="post.application">・ {{ post.application.name }}</span>
-      <span>・ <i class="mdi mdi-reply"></i> {{ post.replies_count }}</span>
-      <span>・ <i class="mdi mdi-repeat"></i> {{ post.reblogs_count }}</span>
-      <span>・ <i class="mdi mdi-star"></i> {{ post.favourites_count }}</span>
+      <span v-if="details">
+        <span>・ <i class="mdi mdi-reply"></i> {{ post.replies_count }}</span>
+        <span>・ <i class="mdi mdi-repeat"></i> {{ post.reblogs_count }}</span>
+        <span>・ <i class="mdi mdi-star"></i> {{ post.favourites_count }}</span>
+      </span>
     </div>
   </div>
 </template>
@@ -27,6 +29,10 @@ export default {
     host: {
       type: String,
       default: null
+    },
+    details: {
+      type: Boolean,
+      default: true
     }
   }
 }
@@ -34,7 +40,7 @@ export default {
 
 <style>
 .post {
-  @apply p-10 rounded-lg shadow-lg border-2;
+  @apply p-10 rounded-lg shadow-lg border-2 bg-white;
 }
 .post .logo {
   float: right;

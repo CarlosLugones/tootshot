@@ -34,11 +34,16 @@ export default {
   @apply border-2 rounded mb-3 p-3 flex;
 }
 .post .card .image {
-  width: 100pt;
+  background: #313543;
+  flex: 0 0 100px;
   @apply mr-3 rounded;
 }
 .post .card .image img {
-  width: 100pt;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-size: cover;
+  background-position: 50%;
   @apply rounded;
 }
 .post .card .title {
