@@ -18,9 +18,9 @@
       </div>
       <div class="container w-10/12 mx-auto mt-20">    
         <div class="buttons">
-          <Button :class="wrapperSize === 'desktop' ? '' : 'p-button-outlined'" icon="pi pi-desktop" @click="wrapperSize = 'desktop'" />
-          <Button :class="wrapperSize === 'tablet' ? '' : 'p-button-outlined'" icon="pi pi-tablet" @click="wrapperSize = 'tablet'" />
-          <Button :class="wrapperSize === 'mobile' ? '' : 'p-button-outlined'" icon="pi pi-mobile" @click="wrapperSize = 'mobile'" />
+          <Button :class="wrapper === 'desktop' ? '' : 'p-button-outlined'" icon="pi pi-desktop" @click="wrapper = 'desktop'" />
+          <Button :class="wrapper === 'tablet' ? '' : 'p-button-outlined'" icon="pi pi-tablet" @click="wrapper = 'tablet'" />
+          <Button :class="wrapper === 'mobile' ? '' : 'p-button-outlined'" icon="pi pi-mobile" @click="wrapper = 'mobile'" />
           <Button :class="darkMode ? '' : 'p-button-outlined'" icon="pi pi-moon" @click="darkMode = !darkMode" />
           <Button :class="details ? '' : 'p-button-outlined'" icon="pi pi-star" @click="details = !details" />
           <Button :class="padding === 'p-20' ? '' : 'p-button-outlined'" icon="pi pi-arrows-h" @click="togglePadding()" />
@@ -34,7 +34,7 @@
           <Button class="p-button-help" icon="pi pi-copy" />
           <Button class="p-button-help" icon="pi pi-download" @click="downloadPost()" />
         </div>
-        <div :class="`post-wrapper ${wrapperSize} ${gradient} ${padding}`" id="post">
+        <div :class="`post-wrapper ${wrapper} ${gradient} ${padding}`" id="post">
           <mastodon-post
             :post="post"
             :host="host"
@@ -67,7 +67,7 @@ export default {
       url: null,
       host: null,
       post: null,
-      wrapperSize: 'desktop',
+      wrapper: 'desktop',
       darkMode: false,
       details: true,
       padding: 'p-20',
@@ -77,7 +77,7 @@ export default {
   mounted() {
     // Init params
     this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107619692658603975'
-    this.wrapperSize = this.$route.query.size || 'desktop'
+    this.wrapper = this.$route.query.wrapper || 'desktop'
     this.darkMode = this.$route.query.dark || false
     this.details = this.$route.query.details || true
     this.padding = this.$route.query.padding || 'p-20'
