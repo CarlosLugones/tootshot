@@ -70,11 +70,13 @@
           <div class="gradient gradient-6" @click="gradient = 'gradient-6'"></div>
           <div class="gradient gradient-7" @click="gradient = 'gradient-7'"></div>
           <Button
+            label="Copy"
             class="p-button-help"
             :icon="copying ? 'pi pi-spin pi-spinner' : 'pi pi-copy'"
             @click="copyPost()"
           />
           <Button
+            label="Download"
             class="p-button-help"
             :icon="downloading ? 'pi pi-spin pi-spinner' : 'pi pi-download'"
             @click="downloadPost()"
