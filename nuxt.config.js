@@ -1,5 +1,5 @@
 const description = 'A beautiful way to share your toots'
-const banner = '//tootshot.xyz/cover.jpg'
+const banner = 'https://tootshot.xyz/cover.jpg'
 const title = 'TootShot — A beautiful way to share your toots'
 
 export default {
