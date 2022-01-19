@@ -13,7 +13,8 @@
         TootShot is a beautiful way to share your toots. Paste the toot URL, select style options and download or copy the screenshot.
       </p>
       <p class="mb-3">Do you like this? Consider supporting with a donation.</p>
-      <p>Made by <a href="https://lugodev.com" class="text-blue-600" target="_blank">Carlos Lugones</a>.</p>
+      <p class="mb-3">Made by <a href="https://lugodev.com" class="text-blue-600" target="_blank">Carlos Lugones</a>.</p>
+      <a href="https://www.producthunt.com/posts/tootshot?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tootshot" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=327332&theme=light" alt="TootShot - A beautiful way to share your screenshots | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
       <template #footer>
         <Button
           label="Close"
