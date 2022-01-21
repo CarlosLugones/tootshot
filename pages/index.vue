@@ -17,6 +17,10 @@
         <a href="https://lugodev.com" class="text-blue-600" target="_blank">Made by Carlos Lugones</a> ・
         <a href="https://docs.tootshot.xyz" class="text-blue-600" target="_blank">Changelog</a>
       </p>
+      <p class="mb-3 text-xs text-gray-500">
+        Thanks to <a href="https://sasuke.social/@robert" class="text-blue-600" target="_blank">Robert Sasuke</a> and the
+        <a href="https://t.me/lugonials" class="text-blue-600" target="_blank">lugonials</a> community
+      </p>
       <a href="https://www.producthunt.com/posts/tootshot?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tootshot" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=327332&theme=light" alt="TootShot - A beautiful way to share your screenshots | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
       <template #footer>
         <Button
@@ -94,6 +98,9 @@
             :dark-mode="darkMode"
             :emojis="emojis"
           />
+          <div class="watermark">
+            Made with TootShot.xyz
+          </div>
         </div>
       </div>
     </div>
@@ -383,5 +390,19 @@ export default {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   @apply text-3xl text-gray-800 text-center;
+}
+.watermark {
+  bottom: 0;
+  right: 0;
+  float: right;
+  font-size: 8pt;
+  width: 100%;
+  opacity: 0.8;
+  transition: 200ms;
+  @apply p-2 mt-3 text-center text-white;
+}
+.gradient-7 .watermark {
+  color: black;
+  transition: 200ms;
 }
 </style>
