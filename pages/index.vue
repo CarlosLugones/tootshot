@@ -37,10 +37,7 @@
     <!-- end help modal -->
     <div class="lg:flex hidden">
       <div class="topbar">
-        <span class="brand">
-          <img src="favicon.png" alt="TootShot" width="20pt" style="display: inline-block;" />
-          <span>TootShot</span>
-        </span>
+        <span class="brand">TootShot</span>
         <span class="search w-full">
           <span class="p-input-icon-left w-full">
             <i class="pi pi-search" />
