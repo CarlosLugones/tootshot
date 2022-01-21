@@ -51,7 +51,6 @@ export default {
       if (this.post.content) {
         let content = this.post.content
         this.emojis.forEach(emoji => {
-          console.log(emoji)
           content = content.replaceAll(`:${emoji.shortcode}:`, `<img src="${emoji.url}" width="20pt" style="display: inline-block" />`)
         });
         return content

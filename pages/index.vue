@@ -195,7 +195,7 @@ export default {
 
     async getScreenshot() {
       const url = encodeURIComponent(`https://tootshot.xyz?toot=${this.url}&wrapper=${this.wrapper}&details=${this.details}&dark=${this.darkMode}&padding=${this.padding}&gradient=${this.gradient}`)
-      const screentshotUrl = `https://apimania.netlify.app/api/screenshot?url=${url}&size=.post-wrapper`
+      const screentshotUrl = `https://apimania.vercel.app/api/screenshot?url=${url}&size=.post-wrapper`
       const proxyUrl = `https://lugodev-cors-anywhere.herokuapp.com/${screentshotUrl}`
       const res = await this.$axios.get(proxyUrl, {
         responseType: 'blob'
