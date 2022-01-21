@@ -395,7 +395,7 @@ export default {
   bottom: 0;
   right: 0;
   float: right;
-  font-size: 8pt;
+  font-size: 10pt;
   width: 100%;
   opacity: 0.8;
   transition: 200ms;
