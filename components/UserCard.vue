@@ -8,9 +8,7 @@
         :alt="post.account.display_name"
       >
       <span>
-        <span class="name">
-          {{ post.account.display_name || post.account.username }}
-        </span>
+        <span class="name" v-html="name"></span>
         <span class="username">
           @{{ post.account.username }}@{{ host }}
         </span>
@@ -29,6 +27,23 @@ export default {
     host: {
       type: String,
       default: null
+    },
+    emojis: {
+      type: Array,
+      default: () => []
+    }
+  },
+
+  computed: {
+    name() {
+      if (this.post.account.display_name) {
+        let name = this.post.account.display_name
+        this.emojis.forEach(emoji => {
+          name = name.replaceAll(`:${emoji.shortcode}:`, `<img src="${emoji.url}" width="15pt" style="display: inline-block" />`)
+        });
+        return name
+      }
+      return this.post.account.username;
     }
   }
 }

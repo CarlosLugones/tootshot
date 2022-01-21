@@ -1,8 +1,8 @@
 <template>
   <div v-if="post" :class="`post ${dark}`">
     <div class="logo"><img src="mastodon.png" alt="" width="25pt"></div>
-    <user-card :post="post" :host="host" />
-    <div v-html="post.content" class="content mt-3"></div>
+    <user-card :post="post" :host="host" :emojis="emojis" />
+    <div v-html="content" class="content mt-3"></div>
     <div v-if="post.card">
       <post-card :card="post.card" />
     </div>
@@ -37,11 +37,25 @@ export default {
     darkMode: {
       type: Boolean,
       default: false
+    },
+    emojis: {
+      type: Array,
+      default: () => []
     }
   },
   computed: {
     dark () {
       return this.darkMode ? 'dark' : ''
+    },
+    content () {
+      if (this.post.content) {
+        let content = this.post.content
+        this.emojis.forEach(emoji => {
+          console.log(emoji)
+          content = content.replaceAll(`:${emoji.shortcode}:`, `<img src="${emoji.url}" width="20pt" style="display: inline-block" />`)
+        });
+        return content
+      }
     }
   }
 }

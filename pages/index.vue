@@ -89,9 +89,9 @@
             :host="host"
             :details="details"
             :dark-mode="darkMode"
+            :emojis="emojis"
           />
         </div>
-        <div ref="click"></div>
       </div>
     </div>
     <div class="lg:hidden visible">
@@ -127,13 +127,14 @@ export default {
       gradient: null,
       copying: false,
       downloading: false,
-      helpModalActive: false
+      helpModalActive: false,
+      emojis: []
     }
   },
   beforeMount() {
     // Init params
     this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107619692658603975'
-    this.wrapper = this.$route.query.wrapper || 'desktop'
+    this.wrapper = this.$route.query.wrapper || 'tablet'
     this.darkMode = this.$route.query.dark === 'true' || false
     this.details = this.$route.query.details === 'true' || false
     this.padding = this.$route.query.padding || 'p-20'
@@ -142,10 +143,16 @@ export default {
   },
   methods: {
     loadPost () {
+      // Destructure URL
+      const u = new URL(this.url)
+      const { origin, host, pathname } = u
+      const parts = pathname.split('/')
+
+      // Get emojis
+      this.loadCustomEmojis(origin)
+
+      // Get post
       try {
-        const u = new URL(this.url)
-        const { origin, host, pathname } = u
-        const parts = pathname.split('/')
         let id
         if (parts.length === 3) {
           id = parts[2]
@@ -163,6 +170,16 @@ export default {
       } catch (e) {
         console.log(e)
       }
+    },
+
+    loadCustomEmojis(origin) {
+      this.$axios.get(`${origin}/api/v1/custom_emojis`)
+          .then(res => {
+            this.emojis = res.data
+          })
+          .catch(err => {
+            console.log(err)
+          })
     },
 
     togglePadding () {
@@ -197,7 +214,6 @@ export default {
         c.width = img.naturalWidth
         c.height = img.naturalHeight
         ctx.drawImage(img,0,0)
-        that.$refs.click.focus()
         c.toBlob(blob=>{
           const isSafari = /^((?!chrome|android).)*safari/i.test(
             navigator?.userAgent
