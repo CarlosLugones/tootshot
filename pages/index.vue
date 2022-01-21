@@ -143,7 +143,7 @@ export default {
   },
   beforeMount() {
     // Init params
-    this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107663114967783062'
+    this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107640262582064557'
     this.wrapper = this.$route.query.wrapper || 'tablet'
     this.darkMode = this.$route.query.dark === 'true' || false
     this.details = this.$route.query.details === 'true' || false
