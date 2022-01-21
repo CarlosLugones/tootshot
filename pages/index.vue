@@ -12,8 +12,11 @@
       <p class="mb-3">
         TootShot is a beautiful way to share your toots. Paste the toot URL, select style options and download or copy the screenshot.
       </p>
-      <p class="mb-3">Do you like this? Consider supporting with a donation.</p>
-      <p class="mb-3">Made by <a href="https://lugodev.com" class="text-blue-600" target="_blank">Carlos Lugones</a>.</p>
+      <p class="mb-3">Does this add value to your daily life? Consider returning some value back to the product maker (value4value), with a donation.</p>
+      <p class="mb-3">
+        <a href="https://lugodev.com" class="text-blue-600" target="_blank">Made by Carlos Lugones</a> ・
+        <a href="https://docs.tootshot.xyz" class="text-blue-600" target="_blank">Changelog</a>
+      </p>
       <a href="https://www.producthunt.com/posts/tootshot?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tootshot" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=327332&theme=light" alt="TootShot - A beautiful way to share your screenshots | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
       <template #footer>
         <Button
@@ -34,7 +37,10 @@
     <!-- end help modal -->
     <div class="lg:flex hidden">
       <div class="topbar">
-        <span class="brand">TootShot</span>
+        <span class="brand">
+          <img src="favicon.png" alt="TootShot" width="20pt" style="display: inline-block;" />
+          <span>TootShot</span>
+        </span>
         <span class="search w-full">
           <span class="p-input-icon-left w-full">
             <i class="pi pi-search" />
@@ -133,7 +139,7 @@ export default {
   },
   beforeMount() {
     // Init params
-    this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107619692658603975'
+    this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107640262582064557'
     this.wrapper = this.$route.query.wrapper || 'tablet'
     this.darkMode = this.$route.query.dark === 'true' || false
     this.details = this.$route.query.details === 'true' || false
