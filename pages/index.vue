@@ -16,7 +16,7 @@
       <p class="mb-3 text-xs text-gray-500">
         Thanks to <a href="https://sasuke.social/@robert" class="text-blue-600" target="_blank">Robert Sasuke</a>,
         <a href="https://twitter.com/sotoplatero" class="text-blue-600" target="_blank">Damián Soto</a> and the
-        <a href="https://t.me/lugonials" class="text-blue-600" target="_blank">lugonials</a> community.
+        <a href="https://lugonials.social" class="text-blue-600" target="_blank">lugonials</a> community.
       </p>
       <p class="mb-3">
         <a href="https://lugodev.com" class="text-blue-600" target="_blank">Made by Carlos Lugones</a> ・
@@ -188,7 +188,7 @@ export default {
   },
   beforeMount() {
     // Init params
-    this.url = this.$route.query.toot || 'https://sasuke.social/@lugodev/107663160986949260'
+    this.url = this.$route.query.toot || 'https://lugonials.social/@TootShot/107688125699732544'
     this.wrapper = this.$route.query.wrapper || 'tablet'
     this.darkMode = this.$route.query.dark === 'true' || false
     this.details = this.$route.query.details === 'true' || false
