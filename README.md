@@ -1,4 +1,4 @@
-# mastoshot
+# TootShot
 
 ## Build Setup
 
