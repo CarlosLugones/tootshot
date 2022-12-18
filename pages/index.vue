@@ -15,12 +15,11 @@
       </p>
       <p class="mb-3">Does this add value to your daily life? Consider returning some value back to the product maker (value4value), with a donation.</p>
       <p class="mb-3 text-xs text-gray-500">
-        Thanks to <a href="https://robertsasuke.com" class="text-blue-600" target="_blank">Robert Sasuke</a>,
-        <a href="https://twitter.com/sotoplatero" class="text-blue-600" target="_blank">Damián Soto</a> and the
-        <a href="https://t.me/lugonials" class="text-blue-600" target="_blank">lugonials</a> community.
+        Thanks to <a href="https://robertsasuke.com" class="text-blue-600" target="_blank">Robert Sasuke</a> and
+        <a href="https://twitter.com/sotoplatero" class="text-blue-600" target="_blank">Damián Soto</a>.
       </p>
       <p class="mb-3">
-        <a href="https://lugodev.com" class="text-blue-600" target="_blank">Made by Carlos Lugones</a> ・
+        <a href="https://carloslugones.com" class="text-blue-600" target="_blank">Made by Carlos Lugones</a> ・
         <a href="https://docs.tootshot.xyz" class="text-blue-600" target="_blank">Changelog</a>
       </p>
       <a href="https://www.producthunt.com/posts/tootshot?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tootshot" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=327332&theme=light" alt="TootShot - A beautiful way to share your screenshots | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
@@ -31,7 +30,7 @@
           class="p-button-outlined"
           @click="helpModalActive = false"
         />
-        <a href="https://paynest.app/lugodev" target="_blabj">
+        <a href="http://paypal.me/MrCarlosLugones" target="_blank">
           <Button
             label="Donate"
             icon="pi pi-heart"
@@ -41,41 +40,6 @@
       </template>
     </Dialog>
     <!-- end help modal -->
-
-    <!-- new modal -->
-    <!-- Dialog
-      :visible="newModalActive"
-      :style="{width: '50vw'}"
-      :modal="true"
-      header="What's new"
-      @hide="newModalActive = false"
-    >
-      <iframe
-        src="https://sasuke.social/@lugodev/107663160986949260/embed"
-        class="mastodon-embed mb-3 mx-auto"
-        style="max-width: 100%; border: 0"
-        width="400"
-        allowfullscreen="allowfullscreen"
-      >
-      </iframe>
-      <script src="https://sasuke.social/embed.js" async="async"></script>
-      <template #footer>
-        <Button
-          label="Close"
-          icon="pi pi-times"
-          class="p-button-outlined"
-          @click="newModalActive = false"
-        />
-        <a href="https://docs.tootshot.xyz" target="_blabj">
-          <Button
-            label="Changelog"
-            icon="pi pi-link"
-            class="p-button-info"
-          />
-        </a>
-      </template>
-    </Dialog -->
-    <!-- end new modal -->
 
     <div class="lg:flex hidden">
       <div class="topbar">
