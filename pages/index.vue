@@ -1,6 +1,7 @@
 <template>
   <div>
     <Toast />
+
     <!-- help modal -->
     <Dialog
       :visible="helpModalActive"
@@ -168,7 +169,9 @@ import Toast from 'primevue/toast'
 import Dialog from 'primevue/dialog'
 export default {
   name: 'IndexPage',
+
   components: { Button, InputText, Toast, Dialog },
+
   data () {
     return {
       url: null,
@@ -186,9 +189,10 @@ export default {
       emojis: []
     }
   },
+
   beforeMount() {
     // Init params
-    this.url = this.$route.query.toot || 'https://mastodon.social/@lugodev/106631161058713774'
+    this.url = this.$route.query.toot || 'https://espodcast.net/@carloslugones/posts/AQibeEyn0FGnLeAdu4'
     this.wrapper = this.$route.query.wrapper || 'tablet'
     this.darkMode = this.$route.query.dark === 'true' || false
     this.details = this.$route.query.details === 'true' || false
@@ -196,39 +200,49 @@ export default {
     this.gradient = this.$route.query.gradient || 'gradient-1'
     this.loadPost()
   },
+
   methods: {
+    getProxyURL(url) {
+      return `https://cors-proxy.carloslugones.workers.dev/corsproxy/?apiurl=${encodeURIComponent(url)}`;
+    },
+
     loadPost () {
       // Destructure URL
-      const u = new URL(this.url)
-      const { origin, host, pathname } = u
-      const parts = pathname.split('/')
+      if (this.url) {
+        const u = new URL(this.url)
+        const { origin, host, pathname } = u
+        const parts = pathname.split('/')
 
-      // Get emojis
-      this.loadCustomEmojis(origin)
+        // Get emojis
+        this.loadCustomEmojis(origin)
 
-      // Get post
-      try {
-        let id
-        if (parts.length === 3) {
-          id = parts[2]
-        } else {
-          id = parts[3]
+        // Get post
+        try {
+          let id
+          if (parts.length === 3) {
+            id = parts[2]
+          } else {
+            id = parts[3]
+          }
+          console.log(id)
+          const url = this.getProxyURL(`${origin}/api/v1/statuses/${id}`)
+          this.$axios.get(url)
+            .then(res => {
+              this.post = res.data
+              this.host = host
+            })
+            .catch(err => {
+              console.log(err)
+            })
+        } catch (e) {
+          console.log(e)
         }
-        this.$axios.get(`${origin}/api/v1/statuses/${id}`)
-          .then(res => {
-            this.post = res.data
-            this.host = host
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      } catch (e) {
-        console.log(e)
       }
     },
 
     loadCustomEmojis(origin) {
-      this.$axios.get(`${origin}/api/v1/custom_emojis`)
+      const url = this.getProxyURL(`${origin}/api/v1/custom_emojis`)
+      this.$axios.get(url)
           .then(res => {
             this.emojis = res.data
           })
@@ -248,8 +262,7 @@ export default {
     async getScreenshot() {
       const url = encodeURIComponent(`https://tootshot.xyz?toot=${this.url}&wrapper=${this.wrapper}&details=${this.details}&dark=${this.darkMode}&padding=${this.padding}&gradient=${this.gradient}`)
       const screentshotUrl = `https://apimania.vercel.app/api/screenshot?url=${url}&size=.post-wrapper`
-      const proxyUrl = `https://lugodev-cors-anywhere.herokuapp.com/${screentshotUrl}`
-      const res = await this.$axios.get(proxyUrl, {
+      const res = await this.$axios.get(this.getProxyURL(screentshotUrl), {
         responseType: 'blob'
       })
       const blob = new Blob([res.data], { type: 'image/jpeg' })
