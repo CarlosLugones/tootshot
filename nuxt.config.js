@@ -69,7 +69,6 @@ export default {
         name: 'twitter:image:alt',
         content: 'TootShot'
       },
-      { hid: 'twitter:site', name: 'twitter:site', content: '@lugodev' },
       {
         hid: 'twitter:title',
         name: 'twitter:title',
@@ -84,11 +83,6 @@ export default {
         hid: 'twitter:image',
         name: 'twitter:image',
         content: banner
-      },
-      {
-        hid: 'twitter:creator',
-        name: 'twitter:creator',
-        content: '@lugodev'
       },
       {
         name: 'author',
