@@ -177,7 +177,7 @@ export default {
 
   beforeMount() {
     // Init params
-    this.url = this.$route.query.toot || 'https://espodcast.net/@CarlosLugones/posts/AR2b7zUs34Qmh2CExU'
+    this.url = this.$route.query.toot || 'https://espodcast.net/@robertsasuke/posts/AR2Gl7LkgfprIxkNG4'
     this.wrapper = this.$route.query.wrapper || 'tablet'
     this.darkMode = this.$route.query.dark === 'true' || false
     this.details = this.$route.query.details === 'true' || false
