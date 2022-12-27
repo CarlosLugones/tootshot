@@ -13,16 +13,17 @@
       <p class="mb-3">
         TootShot is a beautiful way to share your toots. Paste the toot URL, select style options and download or copy the screenshot.
       </p>
-      <p class="mb-3">Does this add value to your daily life? Consider returning some value back to the product maker (value4value), with a donation.</p>
+      <p class="mb-3">
+        Do you like this? The project is open source, consider contributing to the project or supporting with a donation.
+      </p>
       <p class="mb-3 text-xs text-gray-500">
         Thanks to <a href="https://robertsasuke.com" class="text-blue-600" target="_blank">Robert Sasuke</a> and
         <a href="https://twitter.com/sotoplatero" class="text-blue-600" target="_blank">Damián Soto</a>.
       </p>
       <p class="mb-3">
         <a href="https://carloslugones.com" class="text-blue-600" target="_blank">Made by Carlos Lugones</a> ・
-        <a href="https://docs.tootshot.xyz" class="text-blue-600" target="_blank">Changelog</a>
+        <a href="" class="text-blue-600" target="_blank">Contribute</a>
       </p>
-      <a href="https://www.producthunt.com/posts/tootshot?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tootshot" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=327332&theme=light" alt="TootShot - A beautiful way to share your screenshots | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
       <template #footer>
         <Button
           label="Close"
@@ -30,6 +31,13 @@
           class="p-button-outlined"
           @click="helpModalActive = false"
         />
+        <a href="https://github.com/CarlosLugones/tootshot" target="_blank">
+          <Button
+            label="Contribute"
+            icon="pi pi-code"
+            class="p-button-outlined"
+          />
+        </a>
         <a href="http://paypal.me/MrCarlosLugones" target="_blank">
           <Button
             label="Donate"
@@ -66,7 +74,7 @@
         <span>
           <Button
             icon="pi pi-question-circle"
-            class="p-button-rounded p-button-info p-button-outlined"
+            class="p-button-info p-button-outlined"
             @click="helpModalActive = true"
           />
         </span>
@@ -113,6 +121,7 @@
         </div>
       </div>
     </div>
+
     <div class="lg:hidden visible">
       <div class="h-screen grid content-center align-middle text-center p-10">
         <p class="brand mb-5 mx-auto">TootShot</p>
@@ -123,6 +132,18 @@
         </p>
       </div>
     </div>
+
+    <a
+      href="https://www.producthunt.com/posts/tootshot?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-tootshot"
+      target="_blank"
+      class="producthunt"
+    >
+      <img
+        src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=327332&theme=light"
+        alt="TootShot - A beautiful way to share your screenshots | Product Hunt"
+        style="width: 250px; height: 54px;" width="250" height="54"
+      />
+    </a>
   </div>
 </template>
 
@@ -426,5 +447,10 @@ export default {
 .gradient-7 .watermark {
   color: black;
   transition: 200ms;
+}
+.producthunt {
+  position: absolute;
+  bottom: 10pt;
+  right: 10pt;
 }
 </style>
