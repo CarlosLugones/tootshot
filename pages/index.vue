@@ -108,7 +108,7 @@
           />
         </div>
         <div v-if="post" :class="`post-wrapper ${wrapper} ${gradient} ${padding}`" id="post">
-          <mastodon-post
+          <Toot
             :post="post"
             :host="host"
             :details="details"

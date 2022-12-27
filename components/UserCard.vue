@@ -8,7 +8,13 @@
         :alt="post.account.display_name"
       >
       <span>
-        <span class="name" v-html="name"></span>
+        <span class="name">
+          <span>{{ name }}</span>
+          <span v-if="verified">
+            <i v-if="darkMode" class="mdi mdi-check-decagram text-white"></i>
+            <i v-else class="mdi mdi-check-decagram text-blue-600"></i>
+          </span>
+        </span>
         <span class="username">
           @{{ post.account.username }}@{{ host }}
         </span>
@@ -31,6 +37,10 @@ export default {
     emojis: {
       type: Array,
       default: () => []
+    },
+    darkMode: {
+      type: Boolean,
+      default: null
     }
   },
 
@@ -44,6 +54,10 @@ export default {
         return name
       }
       return this.post.account.username;
+    },
+
+    verified() {
+      return this.post.account.pleroma?.tags.includes('verified')
     }
   }
 }

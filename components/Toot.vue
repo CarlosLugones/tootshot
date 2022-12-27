@@ -1,7 +1,12 @@
 <template>
   <div v-if="post" :class="`post ${dark}`">
     <!-- div class="logo"><img src="mastodon.png" alt="" width="25pt"></div -->
-    <user-card :post="post" :host="host" :emojis="emojis" />
+    <user-card
+      :post="post"
+      :host="host"
+      :emojis="emojis"
+      :darkMode="darkMode"
+    />
     <div v-html="content" class="content mt-3"></div>
     <div v-if="post.card">
       <post-card :card="post.card" />
