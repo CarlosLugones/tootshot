@@ -449,7 +449,7 @@ export default {
   transition: 200ms;
 }
 .producthunt {
-  position: absolute;
+  position: fixed;
   bottom: 10pt;
   right: 10pt;
 }

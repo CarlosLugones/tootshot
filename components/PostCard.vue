@@ -31,7 +31,7 @@ export default {
 
 <style>
 .post .card {
-  @apply border-2 rounded mb-3 p-3 flex;
+  @apply border-2 rounded my-3 p-3 flex;
 }
 .post .card .image {
   background: #313543;
