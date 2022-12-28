@@ -199,7 +199,7 @@ export default {
     },
 
     async loadTrendingPost() {
-      const url = this.getProxyURL('https://mastodon.social/api/v1/trends/statuses') // ?limit=1
+      const url = this.getProxyURL('https://mastodon.social/api/v1/trends/statuses')
       const { data } = await this.$axios.get(url)
       const randomIndex = Math.floor(Math.random() * data.length);
       const post = data[randomIndex];
@@ -221,12 +221,7 @@ export default {
 
         // Get post
         try {
-          let id
-          if (parts.length === 3) {
-            id = parts[2]
-          } else {
-            id = parts[3]
-          }
+          const id = [...parts].pop()
           const url = this.getProxyURL(`${origin}/api/v1/statuses/${id}`)
           const { data } = await this.$axios.get(url)
 
