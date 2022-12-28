@@ -202,7 +202,9 @@ export default {
       const url = this.getProxyURL('https://mastodon.social/api/v1/trends/statuses') // ?limit=1
       const { data } = await this.$axios.get(url)
       const randomIndex = Math.floor(Math.random() * data.length);
-      this.post = data[randomIndex];
+      const post = data[randomIndex];
+      this.url = post.uri
+      this.loadPost()
     },
 
     async loadPost () {
