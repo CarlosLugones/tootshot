@@ -176,20 +176,33 @@ export default {
     }
   },
 
-  beforeMount() {
+  async beforeMount() {
     // Init params
-    this.url = this.$route.query.toot || 'https://espodcast.net/@robertsasuke/posts/AR2Gl7LkgfprIxkNG4'
     this.wrapper = this.$route.query.wrapper || 'tablet'
     this.darkMode = this.$route.query.dark === 'true' || false
     this.details = this.$route.query.details === 'true' || false
     this.padding = this.$route.query.padding || 'p-20'
     this.gradient = this.$route.query.gradient || 'gradient-1'
-    this.loadPost()
+
+    // Load toot
+    if (this.$route.query.toot) {
+      this.url = this.$route.query.toot
+      this.loadPost()
+    } else {
+      await this.loadTrendingPost()
+    }    
   },
 
   methods: {
     getProxyURL(url) {
       return `https://cors-proxy.carloslugones.workers.dev/corsproxy/?apiurl=${encodeURIComponent(url)}`;
+    },
+
+    async loadTrendingPost() {
+      const url = this.getProxyURL('https://mastodon.social/api/v1/trends/statuses') // ?limit=1
+      const { data } = await this.$axios.get(url)
+      const randomIndex = Math.floor(Math.random() * data.length);
+      this.post = data[randomIndex];
     },
 
     async loadPost () {
