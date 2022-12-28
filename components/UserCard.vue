@@ -9,7 +9,8 @@
       >
       <span>
         <span class="name">
-          <span>{{ name }}</span>
+          <!-- the name is intentionally rendered with v-html to include custom emojis -->
+          <span v-html="name"></span>
           <span v-if="verified">
             <i v-if="darkMode" class="mdi mdi-check-decagram text-white"></i>
             <i v-else class="mdi mdi-check-decagram text-blue-600"></i>
@@ -25,7 +26,7 @@
           </span>
         </span>
         <span class="username">
-          @{{ post.account.username }}@{{ host }}
+          @{{ post.account.fqn }}
         </span>
       </span>
     </div>
@@ -53,17 +54,26 @@ export default {
     }
   },
 
+  data() {
+    return {
+      name: null
+    }
+  },
+
+  beforeMount() {
+    // set name
+    if (this.post.account.display_name) {
+      let name = this.post.account.display_name
+      this.emojis.forEach(emoji => {
+        name = name.replaceAll(`:${emoji.shortcode}:`, `<img src="${emoji.url}" width="15pt" style="display: inline-block" />`)
+      });
+      this.name = name
+    } else {
+      this.name = this.post.account.username
+    }
+  },
+
   computed: {
-    name() {
-      if (this.post.account.display_name) {
-        let name = this.post.account.display_name
-        this.emojis.forEach(emoji => {
-          name = name.replaceAll(`:${emoji.shortcode}:`, `<img src="${emoji.url}" width="15pt" style="display: inline-block" />`)
-        });
-        return name
-      }
-      return this.post.account.username;
-    },
     verified() {
       return this.post.account.pleroma?.tags.includes('verified')
     },

@@ -58,7 +58,7 @@
             <InputText
               v-model="url"
               type="text"
-              placeholder="Paste Mastodon toot link"
+              placeholder="Paste a toot link"
               class="w-full"
               @input="loadPost()"
             />
@@ -109,6 +109,7 @@
         </div>
         <div v-if="post" :class="`post-wrapper ${wrapper} ${gradient} ${padding}`" id="post">
           <Toot
+            v-if="post"
             :post="post"
             :host="host"
             :details="details"
@@ -191,15 +192,17 @@ export default {
       return `https://cors-proxy.carloslugones.workers.dev/corsproxy/?apiurl=${encodeURIComponent(url)}`;
     },
 
-    loadPost () {
+    async loadPost () {
+      // Clear previous post
+      this.host = null
+      this.post = null
+      this.emojis = []
+
       // Destructure URL
       if (this.url) {
         const u = new URL(this.url)
         const { origin, host, pathname } = u
         const parts = pathname.split('/')
-
-        // Get emojis
-        this.loadCustomEmojis(origin)
 
         // Get post
         try {
@@ -209,31 +212,26 @@ export default {
           } else {
             id = parts[3]
           }
-          console.log(id)
           const url = this.getProxyURL(`${origin}/api/v1/statuses/${id}`)
-          this.$axios.get(url)
-            .then(res => {
-              this.post = res.data
-              this.host = host
-            })
-            .catch(err => {
-              console.log(err)
-            })
+          const { data } = await this.$axios.get(url)
+
+          // Load emojis from the toot instance, not from the contextual instance
+          const instanceUrl = new URL(data.account.url)
+          await this.loadCustomEmojis(instanceUrl.origin)
+          
+          // Set the post after loading emojis to render them first
+          this.post = data
+          this.host = host
         } catch (e) {
           console.log(e)
         }
       }
     },
 
-    loadCustomEmojis(origin) {
+    async loadCustomEmojis(origin) {
       const url = this.getProxyURL(`${origin}/api/v1/custom_emojis`)
-      this.$axios.get(url)
-          .then(res => {
-            this.emojis = res.data
-          })
-          .catch(err => {
-            console.log(err)
-          })
+      const { data } = await this.$axios.get(url)
+      this.emojis = data
     },
 
     togglePadding () {
