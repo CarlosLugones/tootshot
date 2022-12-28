@@ -26,7 +26,7 @@
           </span>
         </span>
         <span class="username">
-          @{{ post.account.fqn }}
+          {{ username }}
         </span>
       </span>
     </div>
@@ -56,7 +56,8 @@ export default {
 
   data() {
     return {
-      name: null
+      name: null,
+      username: null
     }
   },
 
@@ -71,6 +72,10 @@ export default {
     } else {
       this.name = this.post.account.username
     }
+
+    // username
+    const instanceUrl = new URL(this.post.account.url)    
+    this.username = `@${this.post.account.username}@${instanceUrl.host}`
   },
 
   computed: {
