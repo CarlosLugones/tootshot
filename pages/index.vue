@@ -87,6 +87,7 @@
           <Button :class="darkMode ? '' : 'p-button-outlined'" icon="pi pi-moon" @click="darkMode = !darkMode" />
           <Button :class="details ? '' : 'p-button-outlined'" icon="pi pi-star" @click="details = !details" />
           <Button :class="padding === 'p-20' ? '' : 'p-button-outlined'" icon="pi pi-arrows-h" @click="togglePadding()" />
+          <Button :class="watermark ? '' : 'p-button-outlined'" icon="pi pi-eye" @click="watermark = !watermark" />
           <div class="gradient gradient-1" @click="gradient = 'gradient-1'"></div>
           <div class="gradient gradient-2" @click="gradient = 'gradient-2'"></div>
           <div class="gradient gradient-3" @click="gradient = 'gradient-3'"></div>
@@ -116,7 +117,7 @@
             :dark-mode="darkMode"
             :emojis="emojis"
           />
-          <div class="watermark">
+          <div v-if="watermark" class="watermark">
             Made with TootShot.xyz
           </div>
         </div>
@@ -167,6 +168,7 @@ export default {
       darkMode: false,
       details: true,
       padding: null,
+      watermark: true,
       gradient: null,
       copying: false,
       downloading: false,
@@ -183,6 +185,7 @@ export default {
     this.details = this.$route.query.details === 'true' || false
     this.padding = this.$route.query.padding || 'p-20'
     this.gradient = this.$route.query.gradient || 'gradient-1'
+    this.watermark = this.$route.query.watermark || true
 
     // Load toot
     if (this.$route.query.toot) {
@@ -253,7 +256,7 @@ export default {
     },
 
     async getScreenshot() {
-      const url = encodeURIComponent(`https://tootshot.xyz?toot=${this.url}&wrapper=${this.wrapper}&details=${this.details}&dark=${this.darkMode}&padding=${this.padding}&gradient=${this.gradient}`)
+      const url = encodeURIComponent(`https://tootshot.xyz?toot=${this.url}&wrapper=${this.wrapper}&details=${this.details}&dark=${this.darkMode}&padding=${this.padding}&gradient=${this.gradient}&watermark=${this.watermark}`)
       const screentshotUrl = `https://apimania.vercel.app/api/screenshot?url=${url}&size=.post-wrapper`
       const res = await this.$axios.get(this.getProxyURL(screentshotUrl), {
         responseType: 'blob'
